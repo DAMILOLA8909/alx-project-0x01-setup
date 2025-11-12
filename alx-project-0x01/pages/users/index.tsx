@@ -1,10 +1,14 @@
 import React from "react";
+import Header from "@/components/layout/Header";
 
 const UsersPage: React.FC = () => {
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-6">Users</h1>
-      <p>List of users will appear here.</p>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-grow p-8 bg-gray-50">
+        <h1 className="text-3xl font-bold mb-6 text-gray-800">Users</h1>
+        <p>List of users will appear here.</p>
+      </main>
     </div>
   );
 };
