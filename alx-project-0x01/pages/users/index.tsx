@@ -1,34 +1,25 @@
-import React from "react";
 import Header from "@/components/layout/Header";
-import UserCard from "@/components/common/UserCard";
 import { UserProps } from "@/interfaces";
+import UserCard from "@/components/common/UserCard";
 
-const Users: React.FC<{ posts: UserProps[] }> = ({ posts }) => {
-  console.log(posts);
+interface UsersPageProps {
+  posts: UserProps[];
+}
 
+const Users: React.FC<UsersPageProps> = ({ posts }) => {
   return (
     <div className="flex flex-col h-screen">
       <Header />
-      <main className="p-4 bg-gray-50">
+      <main className="p-4">
         <div className="flex justify-between mb-6">
           <h1 className="text-2xl font-semibold">Users</h1>
-          <button className="bg-blue-700 px-4 py-2 rounded-full text-white">
+          <button className="bg-green-700 px-4 py-2 rounded-full text-white">
             Add User
           </button>
         </div>
         <div className="grid grid-cols-3 gap-4">
-          {posts?.map((user: UserProps, key: number) => (
-            <UserCard
-              key={key}
-              id={user.id}
-              name={user.name}
-              username={user.username}
-              email={user.email}
-              phone={user.phone}
-              website={user.website}
-              company={user.company}
-              address={user.address}
-            />
+          {posts.map((user: UserProps, key: number) => (
+            <UserCard key={key} {...user} />
           ))}
         </div>
       </main>
@@ -36,7 +27,6 @@ const Users: React.FC<{ posts: UserProps[] }> = ({ posts }) => {
   );
 };
 
-// Fetch user data
 export async function getStaticProps() {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
   const posts = await response.json();
